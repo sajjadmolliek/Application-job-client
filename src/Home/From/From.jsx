@@ -12,7 +12,9 @@ const From = () => {
 
   return (
     <div className="shadow-md">
-    <h1 className="text-3xl mt-4 ml-4 font-bold">APPLICATION FOR FINANCIAL AID FOR EDUCATION</h1>
+      <h1 className="text-3xl mt-4 ml-4 font-bold">
+        APPLICATION FOR FINANCIAL AID FOR EDUCATION
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
         <input defaultValue="test" {...register("example")} />
