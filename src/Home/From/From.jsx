@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import useAxiousPublic from "../../Hooks/useAxiousPublic/useAxiousPublic";
 import { toast } from "react-toastify";
 import axios from "axios";
-import RecaptchaComponent from "../../Components/RecaptchaComponent/RecaptchaComponent";
+// import RecaptchaComponent from "../../Components/RecaptchaComponent/RecaptchaComponent";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // import Hosting image URL
 const image_hosting = import.meta.env.VITE_IMAGE_KEY;
@@ -13,7 +14,12 @@ const From = () => {
   const [level, setLevel] = useState(" ");
   const [level2, setLevel2] = useState(" ");
   const [level3, setLevel3] = useState(" ");
+  const [verify, setVerify] = useState(false);
   const axiosPublic = useAxiousPublic();
+  function onChange(value) {
+    console.log("Captcha value:", value);
+    setVerify(true)
+  }
   const {
     register,
     handleSubmit,
@@ -1766,7 +1772,10 @@ const From = () => {
             
             <tr>
           <td colSpan="2">
-            <RecaptchaComponent />
+          <ReCAPTCHA 
+        sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        onChange={onChange}
+      />
           </td>
         </tr>
 
@@ -1778,12 +1787,19 @@ const From = () => {
                   <tbody>
                     <tr className="flex gap-10">
                       <td className="my-10">
-                        <input
+                      {verify? <input 
                           type="submit"
                           name="SubmitFormButton"
                           className="px-4 py-1 border hover:border-[#c2c2c2] border-[#555454] hover:bg-[#b8b7b7] bg-[#E5E5E5]"
                           value="SUBMIT"
-                        />
+                        />: <input
+                          type="button"
+                          name="SubmitFormButton"
+                          className="px-4 py-1 border  border-[#555454] bg-[#E5E5E5]" 
+                          value="SUBMIT" 
+                          title="Firstly Verify that, you are not robot"
+                        />}
+                        
                       </td>
                       <td className="my-10">
                         <input
